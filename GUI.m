@@ -22,7 +22,7 @@ function varargout = GUI(varargin)
 
 % Edit the above text to modify the response to help GUI
 
-% Last Modified by GUIDE v2.5 08-Jun-2020 00:20:15
+% Last Modified by GUIDE v2.5 08-Jun-2020 19:38:10
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -79,12 +79,13 @@ function plot_Callback(hObject, eventdata, handles)
 % hObject    handle to plot (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    fx = get(handles.funcion,'String') ;
-    dfx = get(handles.derivada,'String'); 
+    limitemax = str2double(get(handles.limitemax,'String')) ;
+    limitemin = str2double(get(handles.limiteminimo,'String')); 
     N = str2double(get(handles.N,'String'));
     m = str2double(get(handles.m,'String')); 
     g = str2double(get(handles.g,'String'));
-   fractal(N,g,m,10^(-3));
+    tol = str2double(get(handles.tolerancia,'String'));
+   fractal(limitemin,limitemax,N,g,m,tol);
 
 
 function N_Callback(hObject, eventdata, handles)
@@ -156,18 +157,18 @@ end
 
 
 
-function funcion_Callback(hObject, eventdata, handles)
-% hObject    handle to funcion (see GCBO)
+function limitemax_Callback(hObject, eventdata, handles)
+% hObject    handle to limitemax (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of funcion as text
-%        str2double(get(hObject,'String')) returns contents of funcion as a double
+% Hints: get(hObject,'String') returns contents of limitemax as text
+%        str2double(get(hObject,'String')) returns contents of limitemax as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function funcion_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to funcion (see GCBO)
+function limitemax_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to limitemax (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -179,18 +180,41 @@ end
 
 
 
-function derivada_Callback(hObject, eventdata, handles)
-% hObject    handle to derivada (see GCBO)
+function limiteminimo_Callback(hObject, eventdata, handles)
+% hObject    handle to limiteminimo (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of derivada as text
-%        str2double(get(hObject,'String')) returns contents of derivada as a double
+% Hints: get(hObject,'String') returns contents of limiteminimo as text
+%        str2double(get(hObject,'String')) returns contents of limiteminimo as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function derivada_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to derivada (see GCBO)
+function limiteminimo_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to limiteminimo (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function tolerancia_Callback(hObject, eventdata, handles)
+% hObject    handle to tolerancia (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of tolerancia as text
+%        str2double(get(hObject,'String')) returns contents of tolerancia as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function tolerancia_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to tolerancia (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
